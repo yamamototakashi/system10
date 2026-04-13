@@ -52,7 +52,9 @@ G.updatePlaying = function (dt) {
 /* ---------- プレイヤーパドル ---------- */
 G.updatePlayer = function (dt) {
   if (G.ptrDown) {
-    G.player.y = G.ptrY - G.player.h / 2;
+    // 相対移動: タッチ開始時からの指の移動量だけパドルを動かす
+    var delta = G.ptrY - G.ptrStartY;
+    G.player.y = G.ptrPaddleStartY + delta;
   }
   // キーボード
   var ks = 300;
