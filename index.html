@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Retro Tennis">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="1970s retro style Pong tennis game">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Retro Tennis</title>
+</head>
+<body>
+  <div id="app">
+    <div id="gameFrame">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- Title Screen -->
+      <div id="titleOverlay" class="overlay visible">
+        <div class="overlay-inner">
+          <h1 class="title">RETRO<br>TENNIS</h1>
+          <div class="subtitle">— SYSTEM 10 —</div>
+          <div class="diff-group">
+            <button class="diff-btn" data-diff="EASY">EASY</button>
+            <button class="diff-btn active" data-diff="NORMAL">NORMAL</button>
+            <button class="diff-btn" data-diff="HARD">HARD</button>
+          </div>
+          <button id="startBtn" class="btn btn-main">START</button>
+          <button id="soundBtn" class="btn btn-sub">SOUND: ON</button>
+        </div>
+      </div>
+
+      <!-- Pause Screen -->
+      <div id="pauseOverlay" class="overlay">
+        <div class="overlay-inner">
+          <h2 class="overlay-heading">PAUSED</h2>
+          <button id="resumeBtn" class="btn btn-main">RESUME</button>
+          <button id="homeBtn" class="btn btn-sub">HOME</button>
+        </div>
+      </div>
+
+      <!-- Game Over Screen -->
+      <div id="gameoverOverlay" class="overlay">
+        <div class="overlay-inner">
+          <h2 id="resultText" class="overlay-heading result">YOU WIN!</h2>
+          <div id="finalScore" class="final-score"></div>
+          <button id="retryBtn" class="btn btn-main">RETRY</button>
+          <button id="homeBtn2" class="btn btn-sub">HOME</button>
+        </div>
+      </div>
+
+      <!-- Pause Button (during gameplay) -->
+      <button id="pauseBtn" class="pause-btn hidden">II</button>
+
+      <!-- CRT Effect Overlay -->
+      <div id="crtOverlay"></div>
+    </div>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

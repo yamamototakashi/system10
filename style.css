@@ -1,0 +1,266 @@
+/* ===== Reset ===== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ===== Layout ===== */
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  #app {
+    padding-top: calc(env(safe-area-inset-top) + 4px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
+    padding-left: calc(env(safe-area-inset-left) + 4px);
+    padding-right: calc(env(safe-area-inset-right) + 4px);
+  }
+}
+
+#gameFrame {
+  position: relative;
+  line-height: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, 0.04),
+    0 0 60px rgba(255, 255, 255, 0.02);
+}
+
+#gameCanvas {
+  display: block;
+}
+
+/* ===== CRT Overlay ===== */
+
+#crtOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 100;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.06) 2px,
+      rgba(0, 0, 0, 0.06) 4px
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 50%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+}
+
+/* ===== Overlays ===== */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.82);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 50;
+}
+
+.overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.overlay-inner {
+  text-align: center;
+  padding: 20px;
+}
+
+/* ===== Typography ===== */
+
+.title {
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2.8em;
+  font-weight: bold;
+  line-height: 1.15;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.subtitle {
+  color: #777;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85em;
+  letter-spacing: 0.2em;
+  margin-bottom: 36px;
+}
+
+.overlay-heading {
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.result {
+  font-size: 2.4em;
+}
+
+.final-score {
+  color: #999;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+  margin-bottom: 28px;
+}
+
+/* ===== Buttons ===== */
+
+.btn {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  border: none;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.1s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-main {
+  padding: 15px 0;
+  min-height: 48px;
+  margin-bottom: 12px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 1.2em;
+}
+
+.btn-main:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-sub {
+  padding: 13px 0;
+  min-height: 44px;
+  margin-bottom: 8px;
+  background: transparent;
+  color: #999;
+  border: 1px solid #555;
+  font-size: 0.9em;
+}
+
+.btn-sub:active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ===== Difficulty Select ===== */
+
+.diff-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.diff-btn {
+  background: transparent;
+  color: #666;
+  border: 1px solid #444;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85em;
+  font-weight: bold;
+  padding: 10px 14px;
+  min-height: 44px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.diff-btn.active {
+  color: #fff;
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.diff-btn:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== Pause Button ===== */
+
+.pause-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  color: #aaa;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 60;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pause-btn:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== Utility ===== */
+
+.hidden {
+  display: none !important;
+}
