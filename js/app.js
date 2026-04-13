@@ -63,13 +63,22 @@ function setupPointer() {
 
   c.addEventListener('pointerdown', function (e) {
     e.preventDefault();
-    G.ptrDown = true;
     if (c.setPointerCapture) c.setPointerCapture(e.pointerId);
-    ptrUpdate(e);
+
+    var rect = G.canvas.getBoundingClientRect();
+    var touchY = ((e.clientY - rect.top) / rect.height) * G.VH;
+
+    G.ptrDown = true;
+    G.ptrY = touchY;
+    G.ptrStartY = touchY;
+    // タッチ開始時のパドル位置を記憶（相対移動の基準）
+    G.ptrPaddleStartY = G.player ? G.player.y : (G.VH / 2 - G.PADDLE_H / 2);
   });
   c.addEventListener('pointermove', function (e) {
     e.preventDefault();
-    if (G.ptrDown) ptrUpdate(e);
+    if (!G.ptrDown) return;
+    var rect = G.canvas.getBoundingClientRect();
+    G.ptrY = ((e.clientY - rect.top) / rect.height) * G.VH;
   });
   c.addEventListener('pointerup',      function () { G.ptrDown = false; });
   c.addEventListener('pointercancel',   function () { G.ptrDown = false; });
@@ -78,11 +87,6 @@ function setupPointer() {
   // iOS スクロール防止
   c.addEventListener('touchstart', function (e) { e.preventDefault(); }, { passive: false });
   c.addEventListener('touchmove',  function (e) { e.preventDefault(); }, { passive: false });
-}
-
-function ptrUpdate(e) {
-  var rect = G.canvas.getBoundingClientRect();
-  G.ptrY = ((e.clientY - rect.top) / rect.height) * G.VH;
 }
 
 /* ========== キーボード入力 ========== */
