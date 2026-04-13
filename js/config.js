@@ -87,9 +87,11 @@ G.scoreTimer = 0;
 G.winner = '';
 
 // 入力
-G.ptrDown = false;
-G.ptrY    = G.VH / 2;
-G.keys    = {};
+G.ptrDown   = false;
+G.ptrY      = G.VH / 2;   // 現在の指の仮想Y座標
+G.ptrStartY = 0;           // タッチ開始時の指Y
+G.ptrPaddleStartY = 0;     // タッチ開始時のパドルY
+G.keys      = {};
 
 // CPU AI
 G.cpuErr = 0;
